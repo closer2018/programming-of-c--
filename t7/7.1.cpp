@@ -6,21 +6,21 @@ using namespace std;
 /*******************************************************************/
 class Child {
 protected:
-	int age;
+	int age_;
 public:
-	Child(int a) :age(a) {}
-	void show() { cout << "年龄是:" << age << endl; }
+	Child(int a) :age_(a) {}
+	void show() { cout << "年龄是:" << age_ << endl; }
 };
 
 template <typename T>
 class Boy :public Child {
 private:
-	T sex;
+	T sex_;
 public:
-	Boy(int a, T s) :Child(a) { sex = s; }
+	Boy(int a, T s) :Child(a) { sex_ = s; }
 	void show() {
 		Child::show();
-		cout << "性别是:" << sex << endl;
+		cout << "性别是:" << sex_ << endl;
 	}
 };
 /*******************************************************************/

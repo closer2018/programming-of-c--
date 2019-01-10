@@ -7,39 +7,39 @@ using namespace std;
 template <class T>
 class Point {
 protected:
-	T x, y;
+	T x_, y_;
 public:
-	Point(T a, T b) :x(a), y(b) {}
-	Point(const Point<T> &obj) { x = obj.x; y = obj.y; }
-	void show() { cout << " (" << x << "," << y << ")"; }
+	Point(T a, T b) :x_(a), y_(b) {}
+	Point(const Point<T> &obj) { x_ = obj.x_; y_ = obj.y_; }
+	void show() { cout << " (" << x_ << "," << y_ << ")"; }
 };
 
 template <class T>
 class LineInherit : public Point<T> {//继承
 protected:
-	T x2, y2;
+	T x2_, y2_;
 public:
-	LineInherit(T a, T b, T c, T d) :Point<T>(a, b) { x2 = c; y2 = d; }
-	LineInherit(const LineInherit<T> &obj) :Point<T>(obj.x, obj.y) {//继承的拷贝构造函数
-		x2 = obj.x2;
-		y2 = obj.y2;
+	LineInherit(T a, T b, T c, T d) :Point<T>(a, b) { x2_ = c; y2_ = d; }
+	LineInherit(const LineInherit<T> &obj) :Point<T>(obj.x_, obj.y_) {//继承的拷贝构造函数
+		x2_ = obj.x2_;
+		y2_ = obj.y2_;
 	}
 	void show() {
 		Point<T>::show();
-		cout << " (" << x2 << "," << y2 << ")" << endl;
+		cout << " (" << x2_ << "," << y2_ << ")" << endl;
 	}
 };
 
 template <class T>
 class LineInclude {//包含
 private:
-	Point<T> p1, p2;
+	Point<T> p1_, p2_;
 public:
-	LineInclude<T>(T a, T b, T c, T d) : p1(a, b), p2(c, d) {}
-	LineInclude(const LineInclude<T> &obj) :p1(obj.p1), p2(obj.p2) {}
+	LineInclude<T>(T a, T b, T c, T d) : p1_(a, b), p2_(c, d) {}
+	LineInclude(const LineInclude<T> &obj) :p1_(obj.p1_), p2_(obj.p2_) {}
 	void show() {
-		p1.show();
-		p2.show();
+		p1_.show();
+		p2_.show();
 	}
 };
 /*******************************************************************/
