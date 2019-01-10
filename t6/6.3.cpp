@@ -1,45 +1,64 @@
-/*3.¶¨ÒåÒ»¸öÏß¶ÎÀà×÷Îª¾ØĞÎµÄ»ùÀà£¬»ùÀàÓĞÆğµãºÍÖÕµã×ø±ê£¬ÓĞÊä³ö×ø±êºÍ³¤¶ÈÒÔ¼°Ïß¶Î
-ºÍxÖáµÄ¼Ğ½ÇµÄ³ÉÔ±º¯Êı¡£¾ØĞÎÀàÓÃÏß¶Î¶ÔÏóµÄÁ½¸ö×ø±ê×÷Îª×Ô¼ºÒ»Ìõ±ßµÄÎ»ÖÃ£¬Ëü¾ß
-ÓĞÁíÍâÒ»Ìõ±ß£¬ÄÜÊä³ö¾ØĞÎµÄ4¸ö¶¥µã×ø±ê¡£¸ø³öÀàµÄ¶¨Òå²¢ÓÃ³ÌĞòÑéÖ¤ËüÃÇµÄ¹¦ÄÜ¡£*/
+ï»¿/*3.å®šä¹‰ä¸€ä¸ªçº¿æ®µç±»ä½œä¸ºçŸ©å½¢çš„åŸºç±»ï¼ŒåŸºç±»æœ‰èµ·ç‚¹å’Œç»ˆç‚¹åæ ‡ï¼Œæœ‰è¾“å‡ºåæ ‡å’Œé•¿åº¦ä»¥åŠçº¿æ®µ
+å’Œxè½´çš„å¤¹è§’çš„æˆå‘˜å‡½æ•°ã€‚çŸ©å½¢ç±»ç”¨çº¿æ®µå¯¹è±¡çš„ä¸¤ä¸ªåæ ‡ä½œä¸ºè‡ªå·±ä¸€æ¡è¾¹çš„ä½ç½®ï¼Œå®ƒå…·
+æœ‰å¦å¤–ä¸€æ¡è¾¹ï¼Œèƒ½è¾“å‡ºçŸ©å½¢çš„4ä¸ªé¡¶ç‚¹åæ ‡ã€‚ç»™å‡ºç±»çš„å®šä¹‰å¹¶ç”¨ç¨‹åºéªŒè¯å®ƒä»¬çš„åŠŸèƒ½ã€‚*/
 
 #include <iostream>
 #include <cmath>
 using namespace std;
-/*******************************************************************/
-const double PI = 3.14159265359;
+/*******************************************************************************/
+const double PI = acos(-1);
 
-class Line{
-    protected:
-        double startx_, starty_;
-        double endx_, endy_;
-    public:
-        Line(){}
-        Line(double a, double b, double c, double d) :
-            startx_(a), starty_(b), endx_(c), endy_(d) {}
-        void PrintXY() const{
-            cout<<"Æğµã×ø±ê: ("<<startx_<<" , "<<starty_<<")"<<endl;
-            cout<<"ÖÕµã×ø±ê: ("<<endx_<<" , "<<endy_<<")"<<endl;
-            }
-        void PrintAngle() const{
-            double dx = startx_ - endx_;
-            double dy = starty_ - endy_;
-            double len = sqrt( pow((dx), 2) + pow((dy), 2));
-            cout<<"Ïß¶Î³¤¶ÈÊÇ:"<<len<<endl;
-
-            double angle = len > 0 ? round( asin(dy / len) / PI *180) : 0;
-            //angle·¶Î§(-90,90)µ±ÖÕµãÔÚÆğµã×ó±ßÊ±£¬±ØĞë´¦Àí
-            if(endx_ < startx_) {
-                angle = 180 - angle;
-                }
-            cout<<"Ïß¶Î½Ç¶ÈÊÇ:"<<-angle<<endl;
-            }
+class Line {
+protected:
+	double startx_, starty_;
+	double endx_, endy_;
+public:
+	Line() {}
+	Line(double a, double b, double c, double d) :
+		startx_(a), starty_(b), endx_(c), endy_(d) {}
+	void PrintXY() const {
+		cout << "èµ·ç‚¹åæ ‡: (" << startx_ << " , " << starty_ << ")" << endl;
+		cout << "ç»ˆç‚¹åæ ‡: (" << endx_ << " , " << endy_ << ")" << endl;
+	}
+	double Dy()const {
+		return starty_ - endy_;
+	}
+	double Len() const {
+		return sqrt(pow((startx_ - endx_), 2) + pow((this->Dy()), 2));
+	}
+	double Angle() const {
+		return atan2(endy_ - starty_, endx_ - startx_) / PI * 180;
+	}
+	void PrintLenAndAngle() const {
+		cout << "çº¿æ®µé•¿åº¦æ˜¯:" << this->Len() << endl;
+		cout << "çº¿æ®µå’Œxè½´çš„è§’åº¦æ˜¯:" << this->Angle() << endl;
+	}
 };
-/*******************************************************************/
+class Rectangle :public Line {
+protected:
+	double high;
+public:
+	Rectangle(Line &a, double h) :Line(a), high(h) {}
+	void PrintPeak(Line &a) {
+		cout << "åæ ‡1: (" << startx_ << " , " << starty_ << ")" << endl;
+		cout << "åæ ‡2: (" << endx_ << " , " << endy_ << ")" << endl;
+		cout << "åæ ‡3: (" << endx_ - high * sin(a.Angle()) <<
+			" , " << endy_ + high * cos(a.Angle()) << ")" << endl;
+		cout << "åæ ‡4: (" << startx_ - high * sin(a.Angle()) <<
+			" , " << starty_ + high * cos(a.Angle()) << ")" << endl;
+	}
+};
+/*******************************************************************************/
 int main()
 {
-    Line a(0,0,2,2);
-    a.PrintAngle();
+	Line a(0, 0, 2, 0);
+	a.PrintXY();
+	a.PrintLenAndAngle();
 
-    return 0;
+	Rectangle b(a, 2);
+	b.PrintPeak(a);
+
+	return 0;
 }
-/*******************************************************************/
+/*******************************************************************************/
+
