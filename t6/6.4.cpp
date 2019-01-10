@@ -9,22 +9,22 @@ using namespace std;
 const double PI = 3.1415926;
 class Point {
 protected:
-	double x, y;
+	double x_, y_;
 public:
-	Point(double a, double b) :x(a), y(b) {}
+	Point(double a, double b) :x_(a), y_(b) {}
 };
 
 class Circular :public Point {
 protected:
-	double r, area;
+	double r_, area_;
 public:
 	Circular(double a, double b) :Point(a, b) {
-		r = sqrt(x*x + y * y);
-		area = PI * r * r;
+		r_ = sqrt(x_ * x_ + y_ * y_);
+		area_ = PI * r_ * r_;
 	}
-	void PrintPoint() { cout << "坐标:(" << x << "," << y << ")" << endl; }
-	void PrintRadius() { cout << "圆半径:" << r << endl; }
-	void PrintArea() { cout << "圆面积:" << area << endl; }
+	void PrintPoint() { cout << "坐标:(" << x_ << "," << y_ << ")" << endl; }
+	void PrintRadius() { cout << "圆半径:" << r_ << endl; }
+	void PrintArea() { cout << "圆面积:" << area_ << endl; }
 };
 /*************************************************************************/
 int main()
