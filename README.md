@@ -8,6 +8,5 @@
 <a href="https://github.com/closer2018/programming-of-c--/tree/master/t5">第5章<br></a>
 <a href="https://github.com/closer2018/programming-of-c--/tree/master/t6">第6章<br></a>
 <a href="https://github.com/closer2018/programming-of-c--/tree/master/t7">第7章<br></a>
-<a href="https://github.com/closer2018/programming-of-c--/tree/master/t8">第8章<br></a>
 <a href="https://github.com/closer2018/programming-of-c--/tree/master/t9">第9章<br></a>
 <a href="https://github.com/closer2018/programming-of-c--/tree/master/t10">第10章<br></a>
